@@ -12,7 +12,7 @@ double volume()
 { 
 return PI * radius * radius * height;
 }
-public static void main (String args[])
+void main ()
 {
 classes c1;
 c1=new classes(10,5);
