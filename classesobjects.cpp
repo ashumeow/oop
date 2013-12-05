@@ -1,26 +1,55 @@
-#include<iostream>
-static float PI=3.14;
+#include <iostream>
+
+static double PI = 3.14;
+
 class Cylinder
 {
 private:
-float radius;
-float height;
+    double radius;
+    double height;
 public:
-Cylinder(float,float)
-{
-float volume(void);
+    Cylinder() = default;
+    Cylinder(const double &rad, const double &__height): radius(rad), height(__height) {}
+    
+    //Copy-control constructors
+    Cylinder(const Cylinder &cyl): Cylinder(cyl.radius, cyl.height) {}
+    Cylinder(Cylinder &&cyl): Cylinder(std::move(cyl.radius), std::move(cyl.height)) {}
+    Cylinder& operator=(const Cylinder &);
+    Cylinder& operator=(Cylinder &&);
+    
+    double volume();
+    
+    friend Cylinder ret();
 };
-Cylinder::Cylinder(float a,float b)
+
+Cylinder& Cylinder::operator=(const Cylinder &cyl)
 {
-radius=a;
-height=b;
+    this->radius = cyl.radius;
+    this->height = cyl.height;
+    return *this;
 }
-float Cylinder::volume(void)
+
+Cylinder& Cylinder::operator=(Cylinder &&cyl)
 {
-return PI*radius*radius*height;
+    this->radius = std::move(cyl.radius);
+    this->height = std::move(cyl.height);
+    return *this;
 }
-void main()
+
+double Cylinder::volume(void)
 {
-Cylinder cyl=Cylinder(10,8);
-cout<<"Volume of the cylinder is"<<cyl.volume();
+    return PI*radius*radius*height;
+}
+
+Cylinder ret(){
+	return Cylinder(10, 10);
+}
+
+int main()
+{
+    Cylinder cyl(10.0, 8.0), cyl2;
+    cyl2 = ret(); //call on Cylinder& Cylinder::operator=(Cylinder &&cyl)
+
+    std::cout << "Volume of the cylinder is " << cyl2.volume() << std::endl;
+    return 0;
 }
