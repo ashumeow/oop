@@ -7,7 +7,7 @@ interface ICylinder
 }
 public class Cylinder implements ICylinder
 {
-public static void main (String[] args) throws IO Exception
+public static void main (String[] args) throws IOException
         {
         double radius;
         double height;
