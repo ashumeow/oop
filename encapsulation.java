@@ -3,17 +3,16 @@ import java.lang.*;
 import java.io.*;
 interface ICylinder
 {
-void setValues(double radius,double hei);
-double volume();
+
 }
-class Cylinder implements ICylinder
+public class Cylinder implements ICylinder
 {
-public static void main (String[] args) throws java.lang.Exception
+public static void main (String[] args) throws IO Exception
         {
         double radius;
         double height;
         double PI=3.14;
-        public void setValues(double rad,double hei)
+        public void setValues(double rad, double hei)
         {
         radius=rad;
         height=hei;
